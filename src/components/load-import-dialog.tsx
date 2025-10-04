@@ -67,7 +67,9 @@ export function LoadImportDialog({
     }
   };
 
-  const handleExampleLoad = (config: (typeof defaultExamples)[0]["config"]) => {
+  const handleExampleLoad = (
+    config: (typeof DEFAULT_EXAMPLES)[0]["config"]
+  ) => {
     onLoadConfiguration(config);
     onClose();
   };

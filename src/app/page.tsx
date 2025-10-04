@@ -23,6 +23,7 @@ import {
   ChevronDown as ChevronDownIcon,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Dither from "@/components/custom/Dither";
 import { DEFAULT_CONFIG } from "@/constants/mandelbrot-config";
 
@@ -288,9 +289,11 @@ export default function Home() {
           >
             <div className="flex items-center">
               <div className="relative">
-                <img
+                <Image
                   src="/logo.png"
                   alt="Mandelbrot Explorer"
+                  width={32}
+                  height={32}
                   className="h-8 w-8 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                 />
               </div>
@@ -379,7 +382,6 @@ export default function Home() {
                     onAddCustomScheme={handleAddCustomScheme}
                     onRemoveCustomScheme={handleRemoveCustomScheme}
                     onCustomColorSchemeChange={handleCustomColorSchemeChange}
-                    onClearDirectColors={() => setDirectColors(undefined)}
                     onReset={handleReset}
                     currentViewport={viewport}
                     currentIterations={maxIterations}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { PRESET_COLOR_SCHEMES } from "@/constants/mandelbrot-config";
 
 interface Complex {
@@ -64,24 +64,24 @@ export function MandelbrotCanvas({
     Math.sqrt(z.real * z.real + z.imag * z.imag);
 
   // Mandelbrot iteration
-  const mandelbrotIteration = (
-    c: Complex,
-    iterations: number = maxIterations
-  ): number => {
-    let z: Complex = {
-      real: initialCondition.real,
-      imag: initialCondition.imag,
-    };
+  const mandelbrotIteration = useCallback(
+    (c: Complex, iterations: number = maxIterations): number => {
+      let z: Complex = {
+        real: initialCondition.real,
+        imag: initialCondition.imag,
+      };
 
-    for (let i = 0; i < iterations; i++) {
-      if (magnitude(z) > escapeThreshold) {
-        return i;
+      for (let i = 0; i < iterations; i++) {
+        if (magnitude(z) > escapeThreshold) {
+          return i;
+        }
+        z = add(multiply(z, z), c);
       }
-      z = add(multiply(z, z), c);
-    }
 
-    return iterations;
-  };
+      return iterations;
+    },
+    [maxIterations, initialCondition, escapeThreshold]
+  );
 
   // Color schemes
   // Use preset color schemes from constants
@@ -125,38 +125,47 @@ export function MandelbrotCanvas({
   };
 
   // Color mapping
-  const getColor = (iterations: number, maxIterations: number): string => {
-    if (iterations === maxIterations) {
-      return "#000000"; // Black for points in the set
-    }
+  const getColor = useCallback(
+    (iterations: number, maxIterations: number): string => {
+      if (iterations === maxIterations) {
+        return "#000000"; // Black for points in the set
+      }
 
-    const t = iterations / maxIterations;
+      const t = iterations / maxIterations;
 
-    // Use direct colors if provided (from JSON)
-    if (directColors && directColors.length > 0) {
-      return getCustomColor(t, directColors);
-    }
+      // Use direct colors if provided (from JSON)
+      if (directColors && directColors.length > 0) {
+        return getCustomColor(t, directColors);
+      }
 
-    // Check if it's a custom scheme
-    const customScheme = customSchemes.find(
-      (scheme) => scheme.name === colorScheme
-    );
-    if (customScheme) {
-      return getCustomColor(t, customScheme.colors);
-    }
+      // Check if it's a custom scheme
+      const customScheme = customSchemes.find(
+        (scheme) => scheme.name === colorScheme
+      );
+      if (customScheme) {
+        return getCustomColor(t, customScheme.colors);
+      }
 
-    // Use preset color scheme
-    const presetColors = presetColorSchemes[colorScheme];
-    if (presetColors) {
-      return getCustomColor(t, presetColors);
-    }
+      // Use preset color scheme
+      const presetColors = presetColorSchemes[colorScheme];
+      if (presetColors) {
+        return getCustomColor(t, presetColors);
+      }
 
-    // Fallback to rainbow
-    return getCustomColor(t, presetColorSchemes.rainbow);
-  };
+      // Fallback to rainbow
+      return getCustomColor(t, presetColorSchemes.rainbow);
+    },
+    [
+      directColors,
+      customSchemes,
+      colorScheme,
+      presetColorSchemes,
+      getCustomColor,
+    ]
+  );
 
   // Render the Mandelbrot set
-  const renderMandelbrot = () => {
+  const renderMandelbrot = useCallback(() => {
     const canvas = (externalCanvasRef || canvasRef).current;
     if (!canvas) return;
 
@@ -222,7 +231,15 @@ export function MandelbrotCanvas({
 
     ctx.putImageData(imageData, 0, 0);
     setIsRendering(false);
-  };
+  }, [
+    viewport,
+    maxIterations,
+    externalCanvasRef,
+    canvasRef,
+    getColor,
+    isDragging,
+    mandelbrotIteration,
+  ]);
 
   // Mouse controls
   const handleWheel = (e: React.WheelEvent) => {
@@ -274,7 +291,7 @@ export function MandelbrotCanvas({
     setIsDragging(false);
   };
 
-  const handleDoubleClick = (e: React.MouseEvent) => {
+  const handleDoubleClick = () => {
     // Reset to default view
     onViewportChange({
       x: -2.5,
@@ -329,6 +346,7 @@ export function MandelbrotCanvas({
     isDragging,
     initialCondition,
     escapeThreshold,
+    renderMandelbrot,
   ]);
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -39,7 +40,6 @@ interface MandelbrotControlsProps {
   onAddCustomScheme: (scheme: CustomColorScheme) => void;
   onRemoveCustomScheme: (name: string) => void;
   onCustomColorSchemeChange: (colors: string[]) => void;
-  onClearDirectColors: () => void;
   onReset: () => void;
   currentViewport: { x: number; y: number; width: number; height: number };
   currentIterations: number;
@@ -62,7 +62,6 @@ export function MandelbrotControls({
   onAddCustomScheme,
   onRemoveCustomScheme,
   onCustomColorSchemeChange,
-  onClearDirectColors,
   onReset,
   currentViewport,
   currentIterations,
@@ -510,7 +509,6 @@ export function MandelbrotControls({
                   <CustomColorDialog
                     onAddScheme={onAddCustomScheme}
                     onRemoveScheme={onRemoveCustomScheme}
-                    customSchemes={customSchemes}
                   />
                 </div>
               </CollapsibleContent>
@@ -749,7 +747,6 @@ export function MandelbrotControls({
             customSchemes={customSchemes}
             onViewportChange={onViewportChange}
             onIterationsChange={onIterationsChange}
-            onColorSchemeChange={onColorSchemeChange}
             onCustomColorSchemeChange={onCustomColorSchemeChange}
             onReset={onReset}
             initialCondition={initialCondition}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus, Trash2, Palette } from "lucide-react";
+import { useState } from "react";
+import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,14 +22,9 @@ interface CustomColorScheme {
 interface CustomColorDialogProps {
   onAddScheme: (scheme: CustomColorScheme) => void;
   onRemoveScheme: (name: string) => void;
-  customSchemes: CustomColorScheme[];
 }
 
-export function CustomColorDialog({
-  onAddScheme,
-  onRemoveScheme,
-  customSchemes,
-}: CustomColorDialogProps) {
+export function CustomColorDialog({ onAddScheme }: CustomColorDialogProps) {
   const [open, setOpen] = useState(false);
   const [schemeName, setSchemeName] = useState("");
   const [colors, setColors] = useState(["#ff0000", "#00ff00", "#0000ff"]);
@@ -60,10 +55,6 @@ export function CustomColorDialog({
       setColors(["#ff0000", "#00ff00", "#0000ff"]);
       setOpen(false);
     }
-  };
-
-  const handleRemove = (name: string) => {
-    onRemoveScheme(name);
   };
 
   return (

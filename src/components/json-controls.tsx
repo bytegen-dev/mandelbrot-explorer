@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Check, X, RotateCcw } from "lucide-react";
 import {
   getPresetColors,
-  DEFAULT_CONFIG,
   DEFAULT_JSON_STRING,
 } from "@/constants/mandelbrot-config";
 
@@ -29,7 +28,6 @@ interface JsonControlsProps {
   customSchemes: CustomColorScheme[];
   onViewportChange: (viewport: Viewport) => void;
   onIterationsChange: (iterations: number) => void;
-  onColorSchemeChange: (colorScheme: string) => void;
   onCustomColorSchemeChange: (colors: string[]) => void;
   onReset: () => void;
   initialCondition?: { real: number; imag: number };
@@ -48,7 +46,6 @@ export function JsonControls({
   customSchemes,
   onViewportChange,
   onIterationsChange,
-  onColorSchemeChange,
   onCustomColorSchemeChange,
   onReset,
   initialCondition = { real: 0, imag: 0 },
@@ -96,6 +93,7 @@ export function JsonControls({
     currentViewport,
     currentIterations,
     currentColorScheme,
+    customSchemes,
     initialCondition,
     escapeThreshold,
   ]);
