@@ -1,5 +1,7 @@
 # Mandelbrot Explorer
 
+<img width="1264" height="1103" alt="Screenshot 2025-10-04 at 18 55 37" src="https://github.com/user-attachments/assets/f839e776-82fe-4158-b0b0-138c90c24749" />
+
 An interactive web application for exploring the famous Mandelbrot set fractal. Built with Next.js, TypeScript, and modern web technologies.
 
 ## Features
