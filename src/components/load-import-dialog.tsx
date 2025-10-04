@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -31,6 +31,10 @@ export function LoadImportDialog({
 }: LoadImportDialogProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [error, setError] = useState("");
+  const [showExamples, setShowExamples] = useState(false);
+
+  // Memoize the examples to prevent unnecessary re-renders
+  const examples = useMemo(() => DEFAULT_EXAMPLES, []);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -74,8 +78,16 @@ export function LoadImportDialog({
     onClose();
   };
 
+  // Reset state when dialog closes
+  const handleClose = () => {
+    setSelectedFile(null);
+    setError("");
+    setShowExamples(false);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -124,37 +136,48 @@ export function LoadImportDialog({
 
           {/* Examples Section */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4" />
-              <h3 className="text-sm font-medium">Default Examples</h3>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                <h3 className="text-sm font-medium">Default Examples</h3>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowExamples(!showExamples)}
+              >
+                {showExamples ? "Hide" : "Show"} Examples
+              </Button>
             </div>
 
-            <div className="grid gap-3">
-              {DEFAULT_EXAMPLES.map((example, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-3 bg-card border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
-                  onClick={() => handleExampleLoad(example.config)}
-                >
-                  <div className="flex-1">
-                    <h4 className="font-medium text-foreground">
-                      {example.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {example.description}
-                    </p>
-                    <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>Iterations: {example.config.iterations}</span>
-                      <span>Escape: {example.config.escapeThreshold}</span>
-                      <span>Colors: {example.config.colorScheme.length}</span>
+            {showExamples && (
+              <div className="grid gap-3">
+                {examples.map((example, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-card border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+                    onClick={() => handleExampleLoad(example.config)}
+                  >
+                    <div className="flex-1">
+                      <h4 className="font-medium text-foreground">
+                        {example.name}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {example.description}
+                      </p>
+                      <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
+                        <span>Iterations: {example.config.iterations}</span>
+                        <span>Escape: {example.config.escapeThreshold}</span>
+                        <span>Colors: {example.config.colorScheme.length}</span>
+                      </div>
                     </div>
+                    <Button size="sm" variant="outline">
+                      Load
+                    </Button>
                   </div>
-                  <Button size="sm" variant="outline">
-                    Load
-                  </Button>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </DialogContent>

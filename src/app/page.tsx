@@ -278,14 +278,10 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 pt-4">
         <div
-          className={`w-full max-w-[1200px] mx-auto transition-all duration-300 ${
-            isScrolled ? "xl:px-20 px-10" : "px-4"
-          }`}
+          className={`w-full max-w-[1200px] mx-auto transition-all duration-300 px-4`}
         >
           <div
-            className={`container flex h-14 items-center justify-between p-2 w-full mx-auto border rounded-lg bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ${
-              isScrolled ? "border-border" : "border-transparent"
-            }`}
+            className={`container flex h-14 items-center justify-between p-2 w-full mx-auto border rounded-lg bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300`}
           >
             <div className="flex items-center">
               <div className="relative">
