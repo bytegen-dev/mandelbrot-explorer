@@ -48,6 +48,24 @@ An interactive web application for exploring the famous Mandelbrot set fractal. 
 - **Burning Ship**: Different escape thresholds
 - **Spiral Galaxy**: High escape threshold patterns
 
+## Performance Optimizations
+
+### **Mouse Wheel Zoom Removal**
+
+Mouse wheel zoom has been intentionally removed to optimize performance and user experience:
+
+- **Scroll Conflict Prevention**: Eliminates interference between page scrolling and canvas zooming
+- **Better Performance**: Reduces event handling overhead during scroll operations
+- **Cleaner UX**: Prevents accidental zooming when scrolling the page
+- **Precise Control**: UI zoom buttons provide more accurate zoom control
+
+### **Rendering Optimizations**
+
+- **Debounced Rendering**: 50ms delay during dragging for smoother performance
+- **Adaptive Resolution**: Lower resolution during dragging, full resolution when stationary
+- **Scroll Detection**: Prevents canvas dragging during page scroll
+- **Lazy Loading**: Examples in load dialog only render when requested
+
 ## Technology Stack
 
 - **Framework**: Next.js 14 with App Router
@@ -104,21 +122,20 @@ bun dev
 ### Mouse Controls
 
 - **Left Click + Drag**: Pan around the fractal
-- **Mouse Wheel**: Zoom in/out
-- **Right Click + Drag**: Zoom to specific area
 - **Double Click**: Reset to default view
+
+> **Note**: Mouse wheel zoom has been removed for optimal performance. Use the UI controls for zooming instead.
 
 ### Keyboard Controls
 
 - **Arrow Keys**: Pan in small increments
-- **+/- Keys**: Zoom in/out
 - **R Key**: Reset to default view
 
 ### Configuration Options
 
 #### UI Controls
 
-- **Zoom**: Use buttons or mouse wheel
+- **Zoom**: Use zoom buttons for precise control
 - **Pan**: Directional buttons or drag
 - **Iterations**: Slider (1-1000)
 - **Color Scheme**: Preset or custom schemes

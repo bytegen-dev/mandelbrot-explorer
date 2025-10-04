@@ -48,6 +48,7 @@ export function MandelbrotCanvas({
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [lastViewport, setLastViewport] = useState(viewport);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   // Complex number operations
   const add = (a: Complex, b: Complex): Complex => ({
@@ -242,17 +243,6 @@ export function MandelbrotCanvas({
   ]);
 
   // Mouse controls
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const zoomFactor = e.deltaY > 0 ? 1.1 : 0.9;
-
-    onViewportChange({
-      x: viewport.x + (viewport.width * (1 - zoomFactor)) / 2,
-      y: viewport.y + (viewport.height * (1 - zoomFactor)) / 2,
-      width: viewport.width * zoomFactor,
-      height: viewport.height * zoomFactor,
-    });
-  };
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (e.button === 0) {
@@ -264,7 +254,7 @@ export function MandelbrotCanvas({
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
+    if (isDragging && !isScrolling) {
       const canvas = (externalCanvasRef || canvasRef).current;
       if (!canvas) return;
 
@@ -349,6 +339,19 @@ export function MandelbrotCanvas({
     renderMandelbrot,
   ]);
 
+  // Detect page scrolling to prevent canvas dragging during scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true);
+      // Reset scrolling state after scroll ends
+      const timeoutId = setTimeout(() => setIsScrolling(false), 150);
+      return () => clearTimeout(timeoutId);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="relative w-full">
       <canvas
@@ -359,7 +362,6 @@ export function MandelbrotCanvas({
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         style={{ aspectRatio: "4/3" }}
-        onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

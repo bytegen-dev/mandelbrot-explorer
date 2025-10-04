@@ -496,10 +496,9 @@ export default function Home() {
                               Mouse Controls
                             </h4>
                             <p className="text-sm text-muted-foreground">
-                              <strong>Scroll wheel:</strong> Zoom in/out •{" "}
-                              <strong>Click & drag:</strong> Pan around •{" "}
-                              <strong>Double-click:</strong> Reset view •{" "}
-                              <strong>Right-click & drag:</strong> Zoom to area
+                              <strong>Click & drag:</strong> Pan around the
+                              fractal • <strong>Double-click:</strong> Reset to
+                              default view
                             </p>
                           </div>
                         </div>
