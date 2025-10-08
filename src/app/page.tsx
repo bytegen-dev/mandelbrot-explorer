@@ -409,7 +409,7 @@ export default function Home() {
                         GitHub
                       </a>
                       <a
-                        href="https://x.com/bytegen-dev"
+                        href="https://x.com/bytegen_dev"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
@@ -641,7 +641,7 @@ export default function Home() {
                         GitHub
                       </a>
                       <a
-                        href="https://x.com/bytegen-dev"
+                        href="https://x.com/bytegen_dev"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
