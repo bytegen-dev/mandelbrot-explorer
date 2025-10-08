@@ -399,7 +399,7 @@ export default function Home() {
                     </h3>
                     <div className="flex justify-center gap-4">
                       <a
-                        href="https://github.com/bytegen_dev"
+                        href="https://github.com/bytegen-dev"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
@@ -631,7 +631,7 @@ export default function Home() {
                     </h3>
                     <div className="flex justify-center gap-4">
                       <a
-                        href="https://github.com/bytegen_dev"
+                        href="https://github.com/bytegen-dev"
           target="_blank"
           rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
