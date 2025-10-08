@@ -285,7 +285,7 @@ export default function Home() {
           >
             <div className="flex items-center">
               <div className="relative">
-                <Image
+        <Image
                   src="/logo.png"
                   alt="Mandelbrot Explorer"
                   width={32}
@@ -399,7 +399,7 @@ export default function Home() {
                     </h3>
                     <div className="flex justify-center gap-4">
                       <a
-                        href="https://github.com/bytegen-dev"
+                        href="https://github.com/bytegen_dev"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
@@ -423,18 +423,18 @@ export default function Home() {
                           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
                         X/Twitter
-                      </a>
-                      <a
+          </a>
+          <a
                         href="https://bytegen.dev"
-                        target="_blank"
-                        rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
                         title="Visit Portfolio"
-                      >
+          >
                         <Globe className="h-4 w-4" />
                         Website
-                      </a>
-                    </div>
+          </a>
+        </div>
                   </div>
                 </div>
               </div>
@@ -631,9 +631,9 @@ export default function Home() {
                     </h3>
                     <div className="flex justify-center gap-4">
                       <a
-                        href="https://github.com/bytegen-dev"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="https://github.com/bytegen_dev"
+          target="_blank"
+          rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
                         title="View on GitHub"
                       >
@@ -655,11 +655,11 @@ export default function Home() {
                           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
                         X/Twitter
-                      </a>
-                      <a
+        </a>
+        <a
                         href="https://bytegen.dev"
-                        target="_blank"
-                        rel="noopener noreferrer"
+          target="_blank"
+          rel="noopener noreferrer"
                         className="flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-background border border-border rounded-md hover:bg-muted/50 transition-colors"
                         title="Visit Portfolio"
                       >
